@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.alihuseyn.model.Instructor;
+import com.alihuseyn.model.InstructorDetail;
 import com.alihuseyn.model.Student;
 
 public class StudentDemo {
@@ -15,33 +17,22 @@ public class StudentDemo {
 		SessionFactory factory = new Configuration()
 									.configure("hibernate.cfg.xml")
 									.addAnnotatedClass(Student.class)
+									.addAnnotatedClass(Instructor.class)
+									.addAnnotatedClass(InstructorDetail.class)
 									.buildSessionFactory();
 		// create session
 		try {
 			Session session = factory.getCurrentSession();
-			Student student = new Student("Daffy", "Gof", "daffy@gmail.com");
-			System.out.println(student);
-			session.beginTransaction();
-			session.save(student);
-			
-			session.getTransaction().commit();
-			
-			session = factory.getCurrentSession();
-			session.beginTransaction();
-			Student tempStudent = session.get(Student.class, 1);
-			System.out.println(tempStudent);
-			session.getTransaction().commit();
-			
-			session = factory.getCurrentSession();
 			session.beginTransaction();
 			
-			List<Student> students = session.createQuery("from Student").getResultList();
-			for(Student temporary : students) {
-				System.out.println(temporary);
-			}
+			Instructor theInstructor = new Instructor("Alihuseyn", "Gulmammadov", "alihuseyn13@gmail.com");
+			InstructorDetail theDetail = new InstructorDetail("http://www.youtube.com", "programming");
+			
+			theInstructor.setInstructorDetail(theDetail);
+			
+			session.save(theInstructor);
 			
 			session.getTransaction().commit();
-			
 		} finally {
 			factory.close();
 		}
