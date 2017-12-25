@@ -8,7 +8,7 @@
 
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://192.168.99.100:32770/alihuseyn?useSSL=false</property>
+        <property name="connection.url">jdbc:mysql://0.0.0.0:33060/alihuseyn?useSSL=false</property>
         <property name="connection.username">root</property>
         <property name="connection.password">admin</property>
 
